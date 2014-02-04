@@ -18,11 +18,11 @@ rm -rf _s/.git _s/README.md
 cd ../../
 
 # Download Underscores Add ons
-git clone git@github.com:fitzryland/Add-to-Underscores-Boilerplate.git
+git clone git@github.com:fitzryland/WordPress-Init.git
 echo "Moving additions to all the right places"
-mv Add-to-Underscores-Boilerplate/into-wp-root/* .
-mv Add-to-Underscores-Boilerplate/into-theme-folder/* wp-content/themes/_s
-rm -rf Add-to-Underscores-Boilerplate
+mv WordPress-Init/into-wp-root/* .
+mv WordPress-Init/into-theme-folder/* wp-content/themes/_s
+rm -rf WordPress-Init
 mv wp-content/themes/_s/style.css wp-content/themes/_s/sass/_base_reset.scss
 
 # Set variables
