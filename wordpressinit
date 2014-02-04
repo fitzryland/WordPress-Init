@@ -99,7 +99,7 @@ echo "Setup WordPress Tables - wp-cli"
 read -p "WordPress Admin Username? " wpAdminUn
 read -p "WordPress Admin Password? " wpAdminPw
 read -p "WordPress Admin Email? " wpAdminEmail
-wp core install --url=http://localhost:8888/$themeSlug/ --title=$themeSlug --admin_user=$wpAdminPw --admin_password=$wpAdminPw --admin_email=$wpAdminEmail
+wp core install --url=http://localhost:8888/$themeSlug/ --title=$themeSlug --admin_user=$wpAdminUn --admin_password=$wpAdminPw --admin_email=$wpAdminEmail
 
 echo "Generate style.css"
 grunt
