@@ -96,10 +96,17 @@ echo "create database"
 /Applications/MAMP/Library/bin/mysql --verbose --user=root --password=root --execute="create database $databaseName"
 
 echo "Setup WordPress Tables - wp-cli"
-wp core install --url=http://localhost:8888/$themeSlug/ --title=$themeSlug --admin_user=fitz --admin_password=admin --admin_email=fitzryland@gmail.com
+read -p "WordPress Admin Username? " wpAdminUn
+read -p "WordPress Admin Password? " wpAdminPw
+read -p "WordPress Admin Email? " wpAdminEmail
+wp core install --url=http://localhost:8888/$themeSlug/ --title=$themeSlug --admin_user=$wpAdminPw --admin_password=$wpAdminPw --admin_email=$wpAdminEmail
 
 echo "Generate style.css"
 grunt
 
 echo "activate new theme"
 wp theme activate $themeSlug
+
+echo "install & activate plugins"
+wp plugin install adminimize advanced-custom-fields force-strong-passwords
+wp plugin activate adminimize advanced-custom-fields force-strong-passwords
