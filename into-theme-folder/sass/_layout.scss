@@ -1,3 +1,31 @@
 // CONTENT
 // This file contains all layout settings.
 // Layout counts as anything that affects horizontal movement.
+
+$tablet-min-size: 768px !default;
+$desktop-min-size: 979px !default;
+
+$small: new-breakpoint(max-width $tablet-min-size 4);
+$medium: new-breakpoint(min-width $tablet-min-size max-width $desktop-min-size 8);
+$medium-andup: new-breakpoint(min-width $tablet-min-size);
+$large: new-breakpoint(min-width $desktop-min-size 16);
+
+
+$small-maxWidth: 316px;
+$medium-maxWidth: 600px;
+$large-maxWidth: 979px;
+
+$column: 20%;
+$gutter: 5%;
+$grid-columns: 4;
+$max-width: $small-maxWidth;
+
+%content-wrap {
+  @include outer-container();
+  @include media($medium) {
+    max-width: $medium-maxWidth;
+  }
+  @include media($large) {
+    max-width: $large-maxWidth;
+  }
+}

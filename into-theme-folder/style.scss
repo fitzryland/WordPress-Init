@@ -7,6 +7,8 @@ Description: %THEME_DESCRIPTION%
 Version: %THEME_VERSION%
 Text Domain: %THEME_SLUG%
 */
+@import 'sass/bourbon/bourbon';
+@import 'sass/neat/neat';
 @import 'sass/global';
 @import 'sass/layout';
 @import 'sass/base_reset';

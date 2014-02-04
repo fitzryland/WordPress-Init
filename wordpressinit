@@ -1,23 +1,23 @@
 #!/bin/sh
 
-# Download WordPress
+echo "Download WordPress"
 curl -O http://wordpress.org/latest.tar.gz
 echo "Extracting WordPress"
 tar -xvzf latest.tar.gz
 echo "Moving WordPress around a bit..."
 mv wordpress/* .
 rmdir wordpress/ ; rm latest.tar.gz
-# # Remove bullshit plugins/themes
+echo "Remove bullshit plugins/themes"
 echo "Remove some bullshit"
 rm -rf wp-content/themes/twentythirteen wp-content/themes/twentytwelve wp-content/plugins/hello.php
 
-# Download Underscores
+echo "Download Underscores"
 cd wp-content/themes
 git clone https://github.com/Automattic/_s.git
 rm -rf _s/.git _s/README.md
 cd ../../
 
-# Download Underscores Add ons
+echo "Download Underscores Add ons"
 git clone git@github.com:fitzryland/WordPress-Init.git
 echo "Moving additions to all the right places"
 mv WordPress-Init/into-wp-root/* .
@@ -25,11 +25,10 @@ mv WordPress-Init/into-theme-folder/* wp-content/themes/_s
 rm -rf WordPress-Init
 mv wp-content/themes/_s/style.css wp-content/themes/_s/sass/_base_reset.scss
 
-# Set variables
+echo "Set variables"
 read -p "Theme Name? " themeName
 echo "I will name your theme: \033[1m" $themeName "\033[0m"
 themeSlug=${PWD##*/}
-# read -p "Theme Slug? " themeSlug
 echo "The theme slug will be: \033[1m" $themeSlug "\033[0m this is assigned my the parent directory"
 read -p "Author name? " authorName
 echo "The theme slug will be: \033[1m" $authorName "\033[0m"
@@ -43,7 +42,7 @@ echo "The theme Version will be: \033[1m" $themeVersion "\033[0m"
 read -p "Theme Description? " themeDescription
 echo "The theme Description will be: \033[1m" $themeDescription "\033[0m"
 
-# Search & Replace underscores specific stuff in the theme code
+echo "Search & Replace underscores specific stuff in the theme code"
 themeTextDomain="'$themeSlug'"
 perl -pi -w -e "s/'_s'/$themeTextDomain/g;" wp-content/themes/_s/*.php
 perl -pi -w -e "s/'_s'/$themeTextDomain/g;" wp-content/themes/_s/*/*.php
@@ -58,11 +57,11 @@ themePrefixedHandles="$themeSlug-"
 perl -pi -w -e "s/_s-/$themePrefixedHandles/g;" wp-content/themes/_s/*.php
 perl -pi -w -e "s/_s-/$themePrefixedHandles/g;" wp-content/themes/_s/*/*.php
 
-# Search & Replace Grunt stuff
+echo "Search & Replace Grunt stuff"
 perl -pi -w -e "s/%THEME_SLUG%/$themeSlug/g;" package.json
 perl -pi -w -e "s/%THEME_SLUG%/$themeSlug/g;" Gruntfile.js
 
-# Search and replace theme meta
+echo "Search and replace theme meta"
 perl -pi -w -e "s/%THEME_SLUG%/$themeSlug/g;" wp-content/themes/_s/style.scss
 perl -pi -w -e "s/%THEME_AUTHOR%/$authorName/g;" wp-content/themes/_s/style.scss
 perl -pi -w -e "s/%THEME_AUTHOR_URI%/$authorUri/g;" wp-content/themes/_s/style.scss
@@ -71,14 +70,21 @@ perl -pi -w -e "s/%THEME_URI%/$themeUri/g;" wp-content/themes/_s/style.scss
 perl -pi -w -e "s/%THEME_VERSION%/$themeVersion/g;" wp-content/themes/_s/style.scss
 perl -pi -w -e "s/%THEME_DESCRIPTION%/$themeDescription/g;" wp-content/themes/_s/style.scss
 
-# Rename _s directory
+echo "installing Bourbon Neat"
+cd wp-content/themes/_s/sass
+bourbon install
+neat install
+cd ../../../../
+
+
+echo "Rename _s directory"
 themeDirectoryPath="wp-content/themes/$themeSlug"
 mv wp-content/themes/_s/ $themeDirectoryPath
 
-# # Install Grunt Modules
+echo "Install Grunt Modules"
 npm install grunt-contrib-concat grunt-contrib-uglify grunt-contrib-watch grunt-contrib-sass grunt-autoprefixer --save-dev
 
-# setup wp-config
+echo "setup wp-config"
 mv wp-config-sample.php wp-config.php
 databaseName="wpdb_$themeSlug"
 perl -pi -w -e "s/database_name_here/$databaseName/g;" wp-config.php
@@ -86,15 +92,14 @@ perl -pi -w -e "s/username_here/root/g;" wp-config.php
 perl -pi -w -e "s/password_here/root/g;" wp-config.php
 perl -pi -w -e "s/define('WP_DEBUG', false)/define('WP_DEBUG', true)/g;" wp-config.php
 
-
-# create database
+echo "create database"
 /Applications/MAMP/Library/bin/mysql --verbose --user=root --password=root --execute="create database $databaseName"
 
-# run wp install
+echo "Setup WordPress Tables - wp-cli"
 wp core install --url=http://localhost:8888/$themeSlug/ --title=$themeSlug --admin_user=fitz --admin_password=admin --admin_email=fitzryland@gmail.com
 
-# Generate style.css
+echo "Generate style.css"
 grunt
 
-# activate new theme
+echo "activate new theme"
 wp theme activate $themeSlug

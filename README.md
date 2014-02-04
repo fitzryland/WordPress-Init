@@ -11,6 +11,7 @@ TODO
 - add local remote differentiation stuff
 - launch MAMP
 - Start using Vagrant (like a real developer...)
+- fix slashes in URI stuff
 
 Local Dependencies
 ------------------
@@ -20,3 +21,4 @@ Local Dependencies
 - MAMP (servers running, MAMP and WP-CLI are a pain to get to play nice)
 - Grunt
 - Sass
+- Bourbon & Neat (Flexible grid framework)
