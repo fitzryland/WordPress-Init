@@ -6,12 +6,14 @@ Bash script to launch a full WordPress boilerplate install and theme ready for d
 TODO
 ----
 
-- add default user info prompt
-- add plugins
 - add local remote differentiation stuff
 - launch MAMP
 - Start using Vagrant (like a real developer...)
 - fix slashes in URI stuff
+- GIT init
+- .gitignore
+- add image optimization to theme files
+- set permalink settings with wp-cli
 
 Local Dependencies
 ------------------
