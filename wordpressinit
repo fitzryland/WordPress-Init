@@ -21,6 +21,7 @@ echo "Download Underscores Add ons"
 git clone git@github.com:fitzryland/WordPress-Init.git
 echo "Moving additions to all the right places"
 mv WordPress-Init/into-wp-root/* .
+mv WordPress-Init/into-wp-root/.* .
 mv WordPress-Init/into-theme-folder/* wp-content/themes/_s
 rm -rf WordPress-Init
 mv wp-content/themes/_s/style.css wp-content/themes/_s/sass/_base_reset.scss
