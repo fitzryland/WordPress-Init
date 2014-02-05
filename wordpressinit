@@ -62,13 +62,13 @@ perl -pi -w -e "s/%THEME_SLUG%/$themeSlug/g;" package.json
 perl -pi -w -e "s/%THEME_SLUG%/$themeSlug/g;" Gruntfile.js
 
 echo "Search and replace theme meta"
-perl -pi -w -e "s/%THEME_SLUG%/$themeSlug/g;" wp-content/themes/_s/style.scss
-perl -pi -w -e "s/%THEME_AUTHOR%/$authorName/g;" wp-content/themes/_s/style.scss
-perl -pi -w -e "s/%THEME_AUTHOR_URI%/$authorUri/g;" wp-content/themes/_s/style.scss
-perl -pi -w -e "s/%THEME_NAME%/$themeName/g;" wp-content/themes/_s/style.scss
-perl -pi -w -e "s/%THEME_URI%/$themeUri/g;" wp-content/themes/_s/style.scss
-perl -pi -w -e "s/%THEME_VERSION%/$themeVersion/g;" wp-content/themes/_s/style.scss
-perl -pi -w -e "s/%THEME_DESCRIPTION%/$themeDescription/g;" wp-content/themes/_s/style.scss
+perl -pi -w -e "s~%THEME_SLUG%~$themeSlug~g;" wp-content/themes/_s/style.scss
+perl -pi -w -e "s~%THEME_AUTHOR%~$authorName~g;" wp-content/themes/_s/style.scss
+perl -pi -w -e "s~%THEME_AUTHOR_URI%~$authorUri~g;" wp-content/themes/_s/style.scss
+perl -pi -w -e "s~%THEME_NAME%~$themeName~g;" wp-content/themes/_s/style.scss
+perl -pi -w -e "s~%THEME_URI%~$themeUri~g;" wp-content/themes/_s/style.scss
+perl -pi -w -e "s~%THEME_VERSION%~$themeVersion~g;" wp-content/themes/_s/style.scss
+perl -pi -w -e "s~%THEME_DESCRIPTION%~$themeDescription~g;" wp-content/themes/_s/style.scss
 
 echo "installing Bourbon Neat"
 cd wp-content/themes/_s/sass
@@ -112,7 +112,8 @@ wp plugin install adminimize advanced-custom-fields force-strong-passwords
 wp plugin activate adminimize advanced-custom-fields force-strong-passwords
 
 echo "Set permalink structure to /%postname%/"
-wp rewrite structure /%postname%/
+touch .htaccess
+wp rewrite structure '/%postname%/' --hard
 
 echo "initialize GIT"
 git init

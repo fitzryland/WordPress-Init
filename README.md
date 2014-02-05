@@ -9,9 +9,8 @@ TODO
 - add local remote differentiation stuff
 - launch MAMP
 - Start using Vagrant (like a real developer...)
-- fix slashes in URI stuff
 - add image optimization to theme files
-
+- reorganize js folder
 
 Local Dependencies
 ------------------
