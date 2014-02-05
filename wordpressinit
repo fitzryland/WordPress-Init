@@ -110,3 +110,9 @@ wp theme activate $themeSlug
 echo "install & activate plugins"
 wp plugin install adminimize advanced-custom-fields force-strong-passwords
 wp plugin activate adminimize advanced-custom-fields force-strong-passwords
+
+echo "Set permalink structure to /%postname%/"
+wp rewrite structure /%postname%/
+
+echo "initialize GIT"
+git init

@@ -10,10 +10,8 @@ TODO
 - launch MAMP
 - Start using Vagrant (like a real developer...)
 - fix slashes in URI stuff
-- GIT init
-- .gitignore
 - add image optimization to theme files
-- set permalink settings with wp-cli
+
 
 Local Dependencies
 ------------------
