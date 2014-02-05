@@ -1,49 +1,68 @@
 #!/bin/sh
 
-echo "Download WordPress"
+pinkBGStart="\033[105m\033[97m"
+pinkTextStart="\033[95m"
+colorEnd="\033[0m"
+wpiFlag="$pinkBGStart WPI $colorEnd"
+pinkHorizontal="$pinkBGStart ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ $colorEnd"
+pinkHorizontalSmall="$pinkTextStart ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ $colorEnd"
+pinkTick="$pinkTextStart ~ $colorEnd"
+
+gruntModules="grunt-contrib-concat grunt-contrib-uglify grunt-contrib-watch grunt-contrib-sass grunt-autoprefixer"
+wpPlugins="adminimize advanced-custom-fields force-strong-passwords"
+
+echo "$wpiFlag Download & Extract WordPress $pinkHorizontalSmall"
 curl -O http://wordpress.org/latest.tar.gz
-echo "Extracting WordPress"
-tar -xvzf latest.tar.gz
-echo "Moving WordPress around a bit..."
+tar -xzf latest.tar.gz
+echo "$pinkTick Moving WordPress around a bit... $pinkTick"
 mv wordpress/* .
 rmdir wordpress/ ; rm latest.tar.gz
-echo "Remove bullshit plugins/themes"
-echo "Remove some bullshit"
+echo "$pinkTick Remove bullshit plugins/themes $pinkTick"
 rm -rf wp-content/themes/twentythirteen wp-content/themes/twentytwelve wp-content/plugins/hello.php
-
-echo "Download Underscores"
+echo "$pinkTick Download Underscores $pinkTick"
 cd wp-content/themes
 git clone https://github.com/Automattic/_s.git
 rm -rf _s/.git _s/README.md
 cd ../../
 
-echo "Download Underscores Add ons"
+echo "$wpiFlag Download Underscores Add ons $pinkHorizontalSmall"
 git clone git@github.com:fitzryland/WordPress-Init.git
-echo "Moving additions to all the right places"
+echo "$pinkTick Moving additions to all the right places $pinkTick"
 mv WordPress-Init/into-wp-root/* .
 mv WordPress-Init/into-wp-root/.* .
 mv WordPress-Init/into-theme-folder/* wp-content/themes/_s
 rm -rf WordPress-Init
 mv wp-content/themes/_s/style.css wp-content/themes/_s/sass/_base_reset.scss
+# Move JS around
+mkdir wp-content/themes/_s/js/lib
+mv wp-content/themes/_s/js/* wp-content/themes/_s/js/lib
+touch wp-content/themes/_s/js/main.js
 
-echo "Set variables"
+echo "$wpiFlag Set Theme Meta $pinkHorizontalSmall"
 read -p "Theme Name? " themeName
-echo "I will name your theme: \033[1m" $themeName "\033[0m"
 themeSlug=${PWD##*/}
-echo "The theme slug will be: \033[1m" $themeSlug "\033[0m this is assigned my the parent directory"
 read -p "Author name? " authorName
-echo "The theme slug will be: \033[1m" $authorName "\033[0m"
 read -p "Author URI? " authorUri
-echo "The theme slug will be: \033[1m" $authorUri "\033[0m"
-
 read -p "Theme URI? " themeUri
-echo "The theme URI will be: \033[1m" $themeUri "\033[0m"
 read -p "Theme Version? " themeVersion
-echo "The theme Version will be: \033[1m" $themeVersion "\033[0m"
 read -p "Theme Description? " themeDescription
-echo "The theme Description will be: \033[1m" $themeDescription "\033[0m"
+read -p "WordPress Admin Username? " wpAdminUn
+read -p "WordPress Admin Password? " wpAdminPw
+read -p "WordPress Admin Email? " wpAdminEmail
 
-echo "Search & Replace underscores specific stuff in the theme code"
+echo "$pinkHorizontalSmall"
+printf "Theme Name:\t\t$themeName\n"
+printf "Theme Slug:\t\t$themeSlug\n"
+printf "Author Name:\t\t$authorName\n"
+printf "Author URI:\t\t$authorUri\n"
+printf "Theme Version:\t\t$themeVersion\n"
+printf "Theme Description:\t$themeDescription\n"
+printf "Admin Username:\t\t$wpAdminUn\n"
+printf "Admin Password:\t\t$wpAdminPw\n"
+printf "Admin Email:\t\t$wpAdminEmail\n"
+echo "$pinkHorizontalSmall"
+
+echo "$wpiFlag Search & Replace underscores specific stuff in the theme code $pinkHorizontalSmall"
 themeTextDomain="'$themeSlug'"
 perl -pi -w -e "s/'_s'/$themeTextDomain/g;" wp-content/themes/_s/*.php
 perl -pi -w -e "s/'_s'/$themeTextDomain/g;" wp-content/themes/_s/*/*.php
@@ -58,11 +77,15 @@ themePrefixedHandles="$themeSlug-"
 perl -pi -w -e "s/_s-/$themePrefixedHandles/g;" wp-content/themes/_s/*.php
 perl -pi -w -e "s/_s-/$themePrefixedHandles/g;" wp-content/themes/_s/*/*.php
 
-echo "Search & Replace Grunt stuff"
+echo "$pinkTick update paths for enqued scripts $pinkTick"
+perl -pi -w -e "s~'/js/~'/js/lib/~g;" wp-content/themes/_s/functions.php
+perl -pi -w -e "s~'/js/~'/js/lib/~g;" wp-content/themes/_s/inc/customizer.php
+
+echo "$pinkTick Search & Replace Grunt stuff $pinkTick"
 perl -pi -w -e "s/%THEME_SLUG%/$themeSlug/g;" package.json
 perl -pi -w -e "s/%THEME_SLUG%/$themeSlug/g;" Gruntfile.js
 
-echo "Search and replace theme meta"
+echo "$pinkTick Search and replace theme meta $pinkTick"
 perl -pi -w -e "s~%THEME_SLUG%~$themeSlug~g;" wp-content/themes/_s/style.scss
 perl -pi -w -e "s~%THEME_AUTHOR%~$authorName~g;" wp-content/themes/_s/style.scss
 perl -pi -w -e "s~%THEME_AUTHOR_URI%~$authorUri~g;" wp-content/themes/_s/style.scss
@@ -71,21 +94,22 @@ perl -pi -w -e "s~%THEME_URI%~$themeUri~g;" wp-content/themes/_s/style.scss
 perl -pi -w -e "s~%THEME_VERSION%~$themeVersion~g;" wp-content/themes/_s/style.scss
 perl -pi -w -e "s~%THEME_DESCRIPTION%~$themeDescription~g;" wp-content/themes/_s/style.scss
 
-echo "installing Bourbon Neat"
+echo "$wpiFlag Prepare For WordPress Install $pinkHorizontalSmall"
+
+echo "$pinkTick installing Bourbon Neat $pinkTick"
 cd wp-content/themes/_s/sass
 bourbon install
 neat install
 cd ../../../../
 
-
-echo "Rename _s directory"
+echo "$pinkTick Rename _s directory $pinkTick"
 themeDirectoryPath="wp-content/themes/$themeSlug"
 mv wp-content/themes/_s/ $themeDirectoryPath
 
-echo "Install Grunt Modules"
-npm install grunt-contrib-concat grunt-contrib-uglify grunt-contrib-watch grunt-contrib-sass grunt-autoprefixer --save-dev
+echo "$pinkTick Install Grunt Modules $pinkTick"
+npm install $gruntModules --save-dev --quiet
 
-echo "setup wp-config"
+echo "$pinkTick Setup wp-config $pinkTick"
 mv wp-config-sample.php wp-config.php
 databaseName="wpdb_$themeSlug"
 perl -pi -w -e "s/database_name_here/$databaseName/g;" wp-config.php
@@ -93,28 +117,48 @@ perl -pi -w -e "s/username_here/root/g;" wp-config.php
 perl -pi -w -e "s/password_here/root/g;" wp-config.php
 perl -pi -w -e "s/define('WP_DEBUG', false)/define('WP_DEBUG', true)/g;" wp-config.php
 
-echo "create database"
-/Applications/MAMP/Library/bin/mysql --verbose --user=root --password=root --execute="create database $databaseName"
-
-echo "Setup WordPress Tables - wp-cli"
-read -p "WordPress Admin Username? " wpAdminUn
-read -p "WordPress Admin Password? " wpAdminPw
-read -p "WordPress Admin Email? " wpAdminEmail
-wp core install --url=http://localhost:8888/$themeSlug/ --title=$themeSlug --admin_user=$wpAdminUn --admin_password=$wpAdminPw --admin_email=$wpAdminEmail
-
-echo "Generate style.css"
+echo "$pinkTick Generate Scripts & Style $pinkTick"
 grunt
 
-echo "activate new theme"
+echo "$wpiFlag Install WordPress Database Stuff $pinkHorizontalSmall"
+echo "$pinkTick Create WordPress Database $pinkTick"
+/Applications/MAMP/Library/bin/mysql --verbose --user=root --password=root --execute="create database $databaseName"
+
+echo "$pinkTick Setup WordPress Tables $pinkTick"
+wp core install --url=http://localhost:8888/$themeSlug/ --title=$themeSlug --admin_user=$wpAdminUn --admin_password=$wpAdminPw --admin_email=$wpAdminEmail
+
+echo "$wpiFlag Configure WordPress $pinkHorizontalSmall"
+
+echo "$pinkTick Activate new theme $pinkTick"
 wp theme activate $themeSlug
 
-echo "install & activate plugins"
-wp plugin install adminimize advanced-custom-fields force-strong-passwords
-wp plugin activate adminimize advanced-custom-fields force-strong-passwords
+echo "$pinkTick Install & activate plugins $pinkTick"
+wp plugin install $wpPlugins
+wp plugin activate $wpPlugins
 
-echo "Set permalink structure to /%postname%/"
+echo "$pinkTick Set permalink structure to /%postname%/ $pinkTick"
 perl -pi -w -e "s~%THEME_SLUG%~$themeSlug~g;" .htaccess
 wp rewrite structure '/%postname%/' --hard
 
-echo "initialize GIT"
+echo "$pinkTick Initialize GIT $pinkTick"
 git init
+
+echo "$pinkHorizontal"
+echo "$wpiFlag      All Done!     $wpiFlag"
+echo "$pinkHorizontal"
+echo "$wpiFlag WordPress Settings $wpiFlag"
+echo "$pinkHorizontal"
+printf "Theme Name:\t\t$themeName\n"
+printf "Theme Slug:\t\t$themeSlug\n"
+printf "Author Name:\t\t$authorName\n"
+printf "Author URI:\t\t$authorUri\n"
+printf "Theme Version:\t\t$themeVersion\n"
+printf "Theme Description:\t$themeDescription\n"
+printf "Admin Username:\t\t$wpAdminUn\n"
+printf "Admin Password:\t\t$wpAdminPw\n"
+printf "Admin Email:\t\t$wpAdminEmail\n"
+printf "URL:\t\t\t""http://localhost:8888/$themeSlug/\n"
+echo "$pinkHorizontal"
+printf "Grunt Modules:\t\t$gruntModules\n"
+printf "WordPress Plugins:\t$wpPlugins\n"
+echo "$pinkHorizontal"

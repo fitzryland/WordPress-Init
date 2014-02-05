@@ -2,6 +2,10 @@ WordPress Init
 ==============
 
 Bash script to launch a full WordPress boilerplate install and theme ready for dev.
+The other stuff in the repo is stuff I like to add to _s
+
+I am sure a whole lot of this could be done much more efficiently, but I am learning as I am going. And, most importantly, it works (for me in my bubble)!
+
 
 TODO
 ----
@@ -10,7 +14,7 @@ TODO
 - launch MAMP
 - Start using Vagrant (like a real developer...)
 - add image optimization to theme files
-- reorganize js folder
+- enque main.js
 
 Local Dependencies
 ------------------

@@ -21,11 +21,11 @@ $grid-columns: 4;
 $max-width: $small-maxWidth;
 
 %content-wrap {
-  @include outer-container();
-  @include media($medium) {
-    max-width: $medium-maxWidth;
-  }
-  @include media($large) {
-    max-width: $large-maxWidth;
-  }
+	@include outer-container();
+	@include media($medium) {
+		max-width: $medium-maxWidth;
+	}
+	@include media($large) {
+		max-width: $large-maxWidth;
+	}
 }
