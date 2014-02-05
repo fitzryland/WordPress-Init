@@ -112,7 +112,7 @@ wp plugin install adminimize advanced-custom-fields force-strong-passwords
 wp plugin activate adminimize advanced-custom-fields force-strong-passwords
 
 echo "Set permalink structure to /%postname%/"
-touch .htaccess
+perl -pi -w -e "s~%THEME_SLUG%~$themeSlug~g;" .htaccess
 wp rewrite structure '/%postname%/' --hard
 
 echo "initialize GIT"
