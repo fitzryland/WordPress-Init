@@ -32,4 +32,4 @@ Local Dependencies
 - MAMP (servers running, MAMP and WP-CLI are a pain to get to play nice)
 - Grunt
 - Sass
-- Bourbon & Neat (Flexible grid framework)
+- Compass (for Susy)

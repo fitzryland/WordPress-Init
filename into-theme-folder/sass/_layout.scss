@@ -1,31 +1,53 @@
 // CONTENT
 // This file contains all layout settings.
-// Layout counts as anything that affects horizontal movement.
+// Layout is as anything that affects horizontal movement.
 
-$tablet-min-size: 768px !default;
-$desktop-min-size: 979px !default;
+$total-columns: 5;
+$column-width: 3.1em;		// max-width property on the container element is set to
+$gutter-width: 1.1em;	// [$total-columns * $column-width] + [($total-columns - 1) * $gutter-width] + [$grid-padding * 2]
+$grid-padding: 0.2em;
 
-$small: new-breakpoint(max-width $tablet-min-size 4);
-$medium: new-breakpoint(min-width $tablet-min-size max-width $desktop-min-size 8);
-$medium-andup: new-breakpoint(min-width $tablet-min-size);
-$large: new-breakpoint(min-width $desktop-min-size 16);
+// layout-name, min/max pair & ie fallback, grid-settings
+// layout-name -> name used to call layout
+// min/max pain -> sets media query min/max -> min required, max not required
+// grid settings -> <columns>, <column-width>, <gutter-width>, <grid-padding>
+$layouts:
+	( small, 0em 37.5em, (5,3.1em,1.1em,0.2em) ), // small width = 20em
+	( medium, 37.5em 62em, (9,3.1em,1em,1em) ), // medium width = 37em
+	( medium-andup, 37.5em, (9,3.1em,1em,1em) ),
+	( large, 62em lt-ie9, (18, 3.1em, 1em, 1em) ) // large width = 60em
+	;
+
+@mixin break($break-name) {
+	@each $layout in $layouts {
+		@if $break-name == nth( $layout, 1 ) {
+			@include at-breakpoint(nth( $layout, 2 )) {
 
 
-$small-maxWidth: 316px;
-$medium-maxWidth: 600px;
-$large-maxWidth: 979px;
+				// Partly copied from @mixin with-grid-settings in susy/susy/_grid.scss
+				// keep the defaults around
+				$default-columns: $total-columns;
+				$default-width: $column-width;
+				$default-gutter: $gutter-width;
+				$default-padding: $grid-padding;
 
-$column: 20%;
-$gutter: 5%;
-$grid-columns: 4;
-$max-width: $small-maxWidth;
+				// use the new settings
+				$grid-settings: nth( $layout, 3 );
+				$total-columns: nth( $grid-settings, 1 );
+				$column-width: nth( $grid-settings, 2 );
+				$gutter-width: nth( $grid-settings, 3 );
+				$grid-padding: nth( $grid-settings, 4 );
 
-%content-wrap {
-	@include outer-container();
-	@include media($medium) {
-		max-width: $medium-maxWidth;
+				@content;
+				grid-settings: #{nth( $layout, 3 )};
+				// @include with-grid-settings(nth( $layout, 3 )) {}
+			}
+		}
 	}
-	@include media($large) {
-		max-width: $large-maxWidth;
-	}
+}
+@mixin row() {
+	clear: both;
+	display: block;
+	float: none;
+	@include group();
 }

@@ -81,9 +81,10 @@ echo "$pinkTick update paths for enqued scripts $pinkTick"
 perl -pi -w -e "s~'/js/~'/js/lib/~g;" wp-content/themes/_s/functions.php
 perl -pi -w -e "s~'/js/~'/js/lib/~g;" wp-content/themes/_s/inc/customizer.php
 
-echo "$pinkTick Search & Replace Grunt stuff $pinkTick"
+echo "$pinkTick Search & Replace Grunt and Compass $pinkTick"
 perl -pi -w -e "s/%THEME_SLUG%/$themeSlug/g;" package.json
 perl -pi -w -e "s/%THEME_SLUG%/$themeSlug/g;" Gruntfile.js
+perl -pi -w -e "s/%THEME_SLUG%/$themeSlug/g;" config.rb
 
 echo "$pinkTick Search and replace theme meta $pinkTick"
 perl -pi -w -e "s~%THEME_SLUG%~$themeSlug~g;" wp-content/themes/_s/style.scss
@@ -98,8 +99,11 @@ echo "$wpiFlag Prepare For WordPress Install $pinkHorizontalSmall"
 
 echo "$pinkTick installing Bourbon Neat $pinkTick"
 cd wp-content/themes/_s/sass
-bourbon install
-neat install
+git clone https://github.com/ericam/susy.git
+mv susy/sass/_susy.scss .
+mv susy/sass/susy/ susyTemp
+rm -rf susy
+mv susyTemp/ susy
 cd ../../../../
 
 echo "$pinkTick Rename _s directory $pinkTick"
