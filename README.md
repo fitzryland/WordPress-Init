@@ -11,10 +11,18 @@ TODO
 ----
 
 - add local remote differentiation stuff
+	- local
+		- enque pretty js & css
+		- acf from database
+	- remote
+		- enque minified etc.
+		- acf export
 - launch MAMP
 - Start using Vagrant (like a real developer...)
 - add image optimization to theme files
 - enque main.js
+- acf & Grunt? - https://npmjs.org/package/grunt-acf
+	- need to get WP cedintials out of config file & out of Repo
 
 Local Dependencies
 ------------------
