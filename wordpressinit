@@ -8,7 +8,7 @@ pinkHorizontal="$pinkBGStart ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ $colorEnd"
 pinkHorizontalSmall="$pinkTextStart ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ $colorEnd"
 pinkTick="$pinkTextStart ~ $colorEnd"
 
-gruntModules="grunt-contrib-concat grunt-contrib-uglify grunt-contrib-watch grunt-contrib-sass grunt-autoprefixer"
+gruntModules="grunt-contrib-concat grunt-contrib-uglify grunt-contrib-watch grunt-contrib-sass grunt-contrib-compass grunt-autoprefixer"
 wpPlugins="adminimize advanced-custom-fields force-strong-passwords"
 
 echo "$wpiFlag Download & Extract WordPress $pinkHorizontalSmall"
@@ -25,7 +25,7 @@ git clone https://github.com/Automattic/_s.git
 rm -rf _s/.git _s/README.md
 cd ../../
 
-echo "$wpiFlag Download Underscores Add ons $pinkHorizontalSmall"
+echo "$wpiFlag Download WordPress-Init Additions $pinkHorizontalSmall"
 git clone git@github.com:fitzryland/WordPress-Init.git
 echo "$pinkTick Moving additions to all the right places $pinkTick"
 mv WordPress-Init/into-wp-root/* .
