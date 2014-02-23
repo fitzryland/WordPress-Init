@@ -25,16 +25,6 @@ module.exports = function(grunt) {
         compass: {
             dist: {}
         },
-        // sass: {
-        //     dist: {
-        //         options: {
-        //             style: 'compressed'
-        //         },
-        //         files: {
-        //             'wp-content/themes/%THEME_SLUG%/no-prefix-style.css': 'wp-content/themes/%THEME_SLUG%/style.scss'
-        //         }
-        //     }
-        // },
         autoprefixer: {
             dist: {
                 files: {
