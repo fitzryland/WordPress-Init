@@ -109,7 +109,7 @@ perl -pi -w -e "s~%THEME_DESCRIPTION%~$themeDescription~g;" wp-content/themes/_s
 
 echo "$wpiFlag Prepare For WordPress Install $pinkHorizontalSmall"
 
-echo "$pinkTick installing Bourbon Neat $pinkTick"
+echo "$pinkTick installing Susy $pinkTick"
 cd wp-content/themes/_s/sass
 git clone https://github.com/ericam/susy.git
 mv susy/sass/_susy.scss .
@@ -158,6 +158,10 @@ wp rewrite structure '/%postname%/' --hard
 
 echo "$pinkTick Initialize GIT $pinkTick"
 git init
+
+echo "$pinkTick Launch MAMP and Chrome"
+open /Applications/MAMP/MAMP.app/
+open -a "/Applications/Google Chrome.app" "http://localhost:8888/$themeSlug/"
 
 echo "$pinkHorizontal"
 echo "$wpiFlag      All Done!     $wpiFlag"
