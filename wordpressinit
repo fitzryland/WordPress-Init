@@ -126,7 +126,13 @@ grunt
 
 echo "$wpiFlag Install WordPress Database Stuff $pinkHorizontalSmall"
 echo "$pinkTick Create WordPress Database $pinkTick"
-/Applications/MAMP/Library/bin/mysql --verbose --user=root --password=root --execute="create database $databaseName"
+#check if database exists first
+if ! /Applications/MAMP/Library/bin/mysql --verbose --user=root --password=root --execute="use $databaseName" then
+	/Applications/MAMP/Library/bin/mysql --verbose --user=root --password=root --execute="create database $databaseName"
+else
+	echo "DATABASE ALREADY EXISTS"
+	exit 0
+fi
 
 echo "$pinkTick Setup WordPress Tables $pinkTick"
 wp core install --url=http://localhost:8888/$themeSlug/ --title=$themeSlug --admin_user=$wpAdminUn --admin_password=$wpAdminPw --admin_email=$wpAdminEmail
