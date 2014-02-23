@@ -11,6 +11,19 @@ pinkTick="$pinkTextStart ~ $colorEnd"
 gruntModules="grunt-contrib-concat grunt-contrib-uglify grunt-contrib-watch grunt-contrib-sass grunt-contrib-compass grunt-autoprefixer"
 wpPlugins="adminimize advanced-custom-fields force-strong-passwords"
 
+themeSlug=${PWD##*/}
+databaseName="wpdb_$themeSlug"
+
+echo "$pinkTick Check if database name is in use $pinkTick"
+if /Applications/MAMP/Library/bin/mysql --user=root --password=root --execute="use $databaseName";
+then
+	echo "$pinkBGStart DATABASE BY THAT NAME ALREADY EXISTS $colorEnd"
+	echo "$pinkTick The database name is chosen by the name of the root project directory. $pinkTick"
+	echo "$pinkTick Either rename the project directory or delete the conflicting database. $pinkTick"
+	exit 0
+fi
+echo "$pinkTick dont worry about that error...."
+
 echo "$wpiFlag Download & Extract WordPress $pinkHorizontalSmall"
 curl -O http://wordpress.org/latest.tar.gz
 tar -xzf latest.tar.gz
@@ -40,7 +53,6 @@ touch wp-content/themes/_s/js/main.js
 
 echo "$wpiFlag Set Theme Meta $pinkHorizontalSmall"
 read -p "Theme Name? " themeName
-themeSlug=${PWD##*/}
 read -p "Author name? " authorName
 read -p "Author URI? " authorUri
 read -p "Theme URI? " themeUri
@@ -115,7 +127,6 @@ npm install $gruntModules --save-dev --quiet
 
 echo "$pinkTick Setup wp-config $pinkTick"
 mv wp-config-sample.php wp-config.php
-databaseName="wpdb_$themeSlug"
 perl -pi -w -e "s/database_name_here/$databaseName/g;" wp-config.php
 perl -pi -w -e "s/username_here/root/g;" wp-config.php
 perl -pi -w -e "s/password_here/root/g;" wp-config.php
@@ -126,13 +137,8 @@ grunt
 
 echo "$wpiFlag Install WordPress Database Stuff $pinkHorizontalSmall"
 echo "$pinkTick Create WordPress Database $pinkTick"
-#check if database exists first
-if ! /Applications/MAMP/Library/bin/mysql --verbose --user=root --password=root --execute="use $databaseName" then
-	/Applications/MAMP/Library/bin/mysql --verbose --user=root --password=root --execute="create database $databaseName"
-else
-	echo "DATABASE ALREADY EXISTS"
-	exit 0
-fi
+/Applications/MAMP/Library/bin/mysql --verbose --user=root --password=root --execute="create database $databaseName"
+
 
 echo "$pinkTick Setup WordPress Tables $pinkTick"
 wp core install --url=http://localhost:8888/$themeSlug/ --title=$themeSlug --admin_user=$wpAdminUn --admin_password=$wpAdminPw --admin_email=$wpAdminEmail
