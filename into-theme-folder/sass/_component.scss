@@ -1,3 +1,15 @@
 // CONTENT
 // This file includes all of the application of styles to specific elements.
 // will likely be broken into multiple files as needed.
+.site {
+	@include group();
+	@include break(small) {
+		@include container;
+	}
+	@include break(medium) {
+		@include container;
+	}
+	@include break(large) {
+		@include container;
+	}
+}
