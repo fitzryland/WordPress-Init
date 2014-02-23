@@ -7,9 +7,9 @@ Description: %THEME_DESCRIPTION%
 Version: %THEME_VERSION%
 Text Domain: %THEME_SLUG%
 */
-@import 'sass/susy';
-@import 'sass/global';
-@import 'sass/layout';
-@import 'sass/base_reset';
-@import 'sass/base';
-@import 'sass/component';
+@import 'susy';
+@import 'global';
+@import 'layout';
+@import 'base_reset';
+@import 'base';
+@import 'component';

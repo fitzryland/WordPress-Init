@@ -87,13 +87,13 @@ perl -pi -w -e "s/%THEME_SLUG%/$themeSlug/g;" Gruntfile.js
 perl -pi -w -e "s/%THEME_SLUG%/$themeSlug/g;" config.rb
 
 echo "$pinkTick Search and replace theme meta $pinkTick"
-perl -pi -w -e "s~%THEME_SLUG%~$themeSlug~g;" wp-content/themes/_s/style.scss
-perl -pi -w -e "s~%THEME_AUTHOR%~$authorName~g;" wp-content/themes/_s/style.scss
-perl -pi -w -e "s~%THEME_AUTHOR_URI%~$authorUri~g;" wp-content/themes/_s/style.scss
-perl -pi -w -e "s~%THEME_NAME%~$themeName~g;" wp-content/themes/_s/style.scss
-perl -pi -w -e "s~%THEME_URI%~$themeUri~g;" wp-content/themes/_s/style.scss
-perl -pi -w -e "s~%THEME_VERSION%~$themeVersion~g;" wp-content/themes/_s/style.scss
-perl -pi -w -e "s~%THEME_DESCRIPTION%~$themeDescription~g;" wp-content/themes/_s/style.scss
+perl -pi -w -e "s~%THEME_SLUG%~$themeSlug~g;" wp-content/themes/_s/sass/no-prefix-style.scss
+perl -pi -w -e "s~%THEME_AUTHOR%~$authorName~g;" wp-content/themes/_s/sass/no-prefix-style.scss
+perl -pi -w -e "s~%THEME_AUTHOR_URI%~$authorUri~g;" wp-content/themes/_s/sass/no-prefix-style.scss
+perl -pi -w -e "s~%THEME_NAME%~$themeName~g;" wp-content/themes/_s/sass/no-prefix-style.scss
+perl -pi -w -e "s~%THEME_URI%~$themeUri~g;" wp-content/themes/_s/sass/no-prefix-style.scss
+perl -pi -w -e "s~%THEME_VERSION%~$themeVersion~g;" wp-content/themes/_s/sass/no-prefix-style.scss
+perl -pi -w -e "s~%THEME_DESCRIPTION%~$themeDescription~g;" wp-content/themes/_s/sass/no-prefix-style.scss
 
 echo "$wpiFlag Prepare For WordPress Install $pinkHorizontalSmall"
 
