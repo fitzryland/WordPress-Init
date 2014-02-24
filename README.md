@@ -10,6 +10,9 @@ I am sure a whole lot of this could be done much more efficiently, but I am lear
 TODO
 ----
 
+- replace my break() mixin with <a href="http://breakpoint-sass.com/">breakpoint</a>
+- this should be split up into different scripts
+	-
 - add local remote differentiation stuff
 	- local
 		- enque pretty js & css
@@ -17,7 +20,6 @@ TODO
 	- remote
 		- enque minified etc.
 		- acf export
-- launch MAMP
 - Start using Vagrant (like a real developer...)
 - add image optimization to theme files
 - enque main.js
