@@ -10,6 +10,9 @@ I am sure a whole lot of this could be done much more efficiently, but I am lear
 TODO
 ----
 
+- need salts in wp-config -> better initial config generally
+- some stupid readme.html file in root
+- use <a href="https://github.com/Team-Sass/modular-scale">Modular Scale</a>?
 - replace my break() mixin with <a href="http://breakpoint-sass.com/">breakpoint</a>
 - this should be split up into different scripts
 	-
