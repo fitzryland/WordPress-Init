@@ -8,6 +8,7 @@ Version: %THEME_VERSION%
 Text Domain: %THEME_SLUG%
 */
 @import 'susy';
+@import 'breakpoint';
 @import 'global';
 @import 'layout';
 @import 'base_reset';
