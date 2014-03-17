@@ -112,8 +112,7 @@ echo "$wpiFlag Prepare For WordPress Install $pinkHorizontalSmall"
 echo "$pinkTick installing Susy $pinkTick"
 cd wp-content/themes/_s/sass
 git clone https://github.com/ericam/susy.git
-mv susy/sass/_susy.scss .
-mv susy/sass/susy/ susyTemp
+mv susy/sass/* susyTemp
 rm -rf susy
 mv susyTemp/ susy
 cd ../../../../
