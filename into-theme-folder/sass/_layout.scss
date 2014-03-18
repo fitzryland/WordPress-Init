@@ -10,35 +10,37 @@
 $layouts: (
 	small: (
 		break: 0em 37.5em,
-		grid: 5 3.1em 1.1em 0.2em show
-		),
+		grid: (
+			columns: 5,
+			gutters: 0.2
+		)
+	),
 	medium: (
 		break: 37.5em 62em,
-		grid: 9 3.1em 1em 1em show
-		),
-	medium-andup: (
-		break: 37.5em,
-		grid: 9 3.1em 1em 1em show
-		),
-	large: (
-		break: 62em lt-ie9,
-		grid: 18 3.1em 1em 1em show
+		grid: (
+			columns: 9,
+			gutters: 0.2
 		)
-	);
-
-
-@mixin break($break-name) {
+	),
+	large: (
+		break: 62em,
+		grid: (
+			columns: 18,
+			gutters: 0.2
+		),
+		fallback: ".lt-ie9"
+	)
+);
+@mixin bp($break-name) {
 	$layout: map-get($layouts, $break-name);
-	@include at-breakpoint(map-get($layout, 'break')) {
-
-		$grid-settings: map-get($layout, 'grid');
-
-		$total-columns: nth( $grid-settings, 1 );
-		$column-width: nth( $grid-settings, 2 );
-		$gutter-width: nth( $grid-settings, 3 );
-		$grid-padding: nth( $grid-settings, 4 );
-
-		@content;
+	@if map-get($layout, "fallback") == null {
+		@include susy-breakpoint(map-get($layout, "break"), map-get($layout, "grid")) {
+			@content;
+		}
+	} @else {
+		@include susy-breakpoint(map-get($layout, "break"), map-get($layout, "grid"), map-get($layout, "fallback")) {
+			@content;
+		}
 	}
 }
 @mixin row() {

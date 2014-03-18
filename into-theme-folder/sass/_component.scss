@@ -3,13 +3,13 @@
 // will likely be broken into multiple files as needed.
 .site {
 	@include group();
-	@include break(small) {
+	@include bp(small) {
 		@include container;
 	}
-	@include break(medium) {
+	@include bp(medium) {
 		@include container;
 	}
-	@include break(large) {
+	@include bp(large) {
 		@include container;
 	}
 }
