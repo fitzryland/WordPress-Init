@@ -10,6 +10,7 @@ I am sure a whole lot of this could be done much more efficiently, but I am lear
 TODO
 ----
 
+- paramitarize url so that everthing insalls correctly if installing in a subdirectory
 - need salts in wp-config -> better initial config generally
 - some stupid readme.html file in root
 - use <a href="https://github.com/Team-Sass/modular-scale">Modular Scale</a>?
