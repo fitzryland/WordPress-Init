@@ -30,6 +30,24 @@ TODO
 - acf & Grunt? - https://npmjs.org/package/grunt-acf
 	- need to get WP cedintials out of config file & out of Repo
 
+- add new sublime text project
+	- open it
+- add all of project to proj (bash script project launcher)
+- add acf-export.php to inc directory
+
+- _s files to remove
+	- CONTRIBUTING.md
+	- rtl.css
+	- layouts
+	- languages
+	- inc/wpcom.php
+	- inc/custom-header.php
+	- inc/customizer.php -> and reference from functions.php
+
+- a new default screenshot.png
+
+
+
 Local Dependencies
 ------------------
 
@@ -38,4 +56,4 @@ Local Dependencies
 - MAMP (servers running, MAMP and WP-CLI are a pain to get to play nice)
 - Grunt
 - Sass 3.3
-- Compass (for Susy)
+- Compass (for Susy.. or at least it used to be...)
