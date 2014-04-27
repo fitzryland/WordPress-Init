@@ -10,13 +10,26 @@ I am sure a whole lot of this could be done much more efficiently, but I am lear
 TODO
 ----
 
+## Initialization
 - paramitarize url so that everthing insalls correctly if installing in a subdirectory
 - need salts in wp-config -> better initial config generally
 - some stupid readme.html file in root
 - use <a href="https://github.com/Team-Sass/modular-scale">Modular Scale</a>?
-- replace my break() mixin with <a href="http://breakpoint-sass.com/">breakpoint</a>
-- this should be split up into different scripts
-	-
+- Start using Vagrant (like a real developer...)
+- add new sublime text project
+	- open it
+- add all of project to proj (bash script project launcher)
+- add acf-export.php to inc directory
+- _s files to remove
+	- inc/customizer.php -> and reference from functions.php
+- a new default screenshot.png
+
+## Grunt
+- add image optimization to theme files
+- acf & Grunt? - https://npmjs.org/package/grunt-acf
+	- need to get WP cedintials out of config file & out of Repo
+
+## Configuration
 - add local remote differentiation stuff
 	- local
 		- enque pretty js & css
@@ -24,24 +37,12 @@ TODO
 	- remote
 		- enque minified etc.
 		- acf export
-- Start using Vagrant (like a real developer...)
-- add image optimization to theme files
+- this should be split up into different scripts
 - enque main.js
-- acf & Grunt? - https://npmjs.org/package/grunt-acf
-	- need to get WP cedintials out of config file & out of Repo
 
-- add new sublime text project
-	- open it
-- add all of project to proj (bash script project launcher)
-- add acf-export.php to inc directory
-
-- _s files to remove
-	- inc/customizer.php -> and reference from functions.php
-
-- a new default screenshot.png
-
+## Sass
+- replace my break() mixin with <a href="http://breakpoint-sass.com/">breakpoint</a>
 - add sass map functions -> color etc
-
 
 Local Dependencies
 ------------------
