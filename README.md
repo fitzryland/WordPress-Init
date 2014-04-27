@@ -36,16 +36,11 @@ TODO
 - add acf-export.php to inc directory
 
 - _s files to remove
-	- CONTRIBUTING.md
-	- rtl.css
-	- layouts
-	- languages
-	- inc/wpcom.php
-	- inc/custom-header.php
 	- inc/customizer.php -> and reference from functions.php
 
 - a new default screenshot.png
 
+- add sass map functions -> color etc
 
 
 Local Dependencies

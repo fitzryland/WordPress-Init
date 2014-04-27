@@ -35,8 +35,9 @@ rm -rf wp-content/themes/twentythirteen wp-content/themes/twentytwelve wp-conten
 echo "$pinkTick Download Underscores $pinkTick"
 cd wp-content/themes
 git clone https://github.com/Automattic/_s.git
-rm -rf _s/.git _s/README.md
-cd ../../
+cd _s
+rm -rf .git README.md CONTRIBUTING.md rtl.css layouts languages inc/wpcom.php inc/custom-header.php
+cd ../../../
 
 echo "$wpiFlag Download WordPress-Init Additions $pinkHorizontalSmall"
 git clone git@github.com:fitzryland/WordPress-Init.git
