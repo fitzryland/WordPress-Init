@@ -10,7 +10,7 @@ I am sure a whole lot of this could be done much more efficiently, but I am lear
 TODO
 ----
 
-## Initialization
+### Initialization
 - paramitarize url so that everthing insalls correctly if installing in a subdirectory
 - need salts in wp-config -> better initial config generally
 - some stupid readme.html file in root
@@ -24,12 +24,12 @@ TODO
 	- inc/customizer.php -> and reference from functions.php
 - a new default screenshot.png
 
-## Grunt
+### Grunt
 - add image optimization to theme files
 - acf & Grunt? - https://npmjs.org/package/grunt-acf
 	- need to get WP cedintials out of config file & out of Repo
 
-## Configuration
+### Configuration
 - add local remote differentiation stuff
 	- local
 		- enque pretty js & css
@@ -40,7 +40,7 @@ TODO
 - this should be split up into different scripts
 - enque main.js
 
-## Sass
+### Sass
 - replace my break() mixin with <a href="http://breakpoint-sass.com/">breakpoint</a>
 - add sass map functions -> color etc
 
