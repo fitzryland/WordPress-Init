@@ -30,15 +30,16 @@ TODO
 	- need to get WP cedintials out of config file & out of Repo
 
 ### Configuration
-- add local remote differentiation stuff
-	- local
-		- enque pretty js & css
-		- acf from database
-	- remote
-		- enque minified etc.
-		- acf export
+- use own version of functions.php
+	- add local remote differentiation stuff
+		- local
+			- enque pretty js & css
+			- acf from database
+		- remote
+			- enque minified etc.
+			- acf export
+	- enque main.js
 - this should be split up into different scripts
-- enque main.js
 
 ### Sass
 - replace my break() mixin with <a href="http://breakpoint-sass.com/">breakpoint</a>
