@@ -23,6 +23,7 @@ TODO
 - _s files to remove
 	- inc/customizer.php -> and reference from functions.php
 - a new default screenshot.png
+- add option for wpe vs vanilla wp install
 
 ### Grunt
 - add image optimization to theme files
