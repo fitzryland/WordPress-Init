@@ -12,12 +12,12 @@ module.exports = function(grunt) {
                     'wp-content/themes/%THEME_SLUG%/js/lib/*.js', // All JS in the libs folder
                     'wp-content/themes/%THEME_SLUG%/js/main.js'  // This specific file
                 ],
-                dest: 'wp-content/themes/%THEME_SLUG%/js/production.js',
+                dest: '.tmp/production.js',
             }
         },
         uglify: {
             build: {
-                src: 'wp-content/themes/%THEME_SLUG%/js/production.js',
+                src: '.tmp/production.js',
                 dest: 'wp-content/themes/%THEME_SLUG%/js/production.min.js'
             }
         },

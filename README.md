@@ -29,6 +29,11 @@ TODO
 - add image optimization to theme files
 - acf & Grunt? - https://npmjs.org/package/grunt-acf
 	- need to get WP cedintials out of config file & out of Repo
+- add .tmp directory for all files still being processesed
+- add revision numbers to file names for cache busting https://github.com/cbas/grunt-rev
+- refine watch task
+- remove compass
+- separate out dev build from production build
 
 ### Configuration
 - use own version of functions.php
