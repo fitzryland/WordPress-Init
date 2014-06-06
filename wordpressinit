@@ -110,6 +110,14 @@ perl -pi -w -e "s~%THEME_DESCRIPTION%~$themeDescription~g;" wp-content/themes/_s
 
 echo "$wpiFlag Prepare For WordPress Install $pinkHorizontalSmall"
 
+echo "$pinkTick installing Susy $pinkTick"
+cd wp-content/themes/_s/sass
+git clone https://github.com/ericam/susy.git
+mv susy/sass/* susyTemp
+rm -rf susy
+mv susyTemp/ susy
+cd ../../../../
+
 echo "$pinkTick Rename _s directory $pinkTick"
 themeDirectoryPath="wp-content/themes/$themeSlug"
 mv wp-content/themes/_s/ $themeDirectoryPath
