@@ -8,7 +8,7 @@ pinkHorizontal="$pinkBGStart ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ $colorEnd"
 pinkHorizontalSmall="$pinkTextStart ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ $colorEnd"
 pinkTick="$pinkTextStart ~ $colorEnd"
 
-gruntModules="grunt-contrib-concat grunt-contrib-uglify grunt-contrib-watch grunt-contrib-sass grunt-autoprefixer"
+gruntModules="grunt-contrib-concat grunt-contrib-uglify grunt-contrib-watch grunt-contrib-sass grunt-contrib-compass grunt-autoprefixer"
 wpPlugins="adminimize advanced-custom-fields force-strong-passwords"
 
 themeSlug=${PWD##*/}
@@ -17,10 +17,10 @@ databaseName="wpdb_$themeSlug"
 echo "$pinkTick Check if database name is in use $pinkTick"
 if /Applications/MAMP/Library/bin/mysql --user=root --password=root --execute="use $databaseName";
 then
-  echo "$pinkBGStart DATABASE BY THAT NAME ALREADY EXISTS $colorEnd"
-  echo "$pinkTick The database name is chosen by the name of the root project directory. $pinkTick"
-  echo "$pinkTick Either rename the project directory or delete the conflicting database. $pinkTick"
-  exit 0
+	echo "$pinkBGStart DATABASE BY THAT NAME ALREADY EXISTS $colorEnd"
+	echo "$pinkTick The database name is chosen by the name of the root project directory. $pinkTick"
+	echo "$pinkTick Either rename the project directory or delete the conflicting database. $pinkTick"
+	exit 0
 fi
 echo "$pinkTick dont worry about that error...."
 

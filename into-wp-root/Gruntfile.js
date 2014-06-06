@@ -22,20 +22,13 @@ module.exports = function(grunt) {
             }
         },
         // Style
-        sass: {
-            dist: {
-                options: {
-                    style: 'expanded'
-                },
-                files: {
-                    '.tmp/style.css': 'wp-content/themes/%THEME_SLUG%/sass/style.scss'
-                }
-            }
+        compass: {
+            dist: {}
         },
         autoprefixer: {
             dist: {
                 files: {
-                    'wp-content/themes/%THEME_SLUG%/style.css': '.tmp/style.css'
+                    'wp-content/themes/%THEME_SLUG%/style.css': 'wp-content/themes/%THEME_SLUG%/no-prefix-style.css'
                 }
             }
         },
@@ -46,10 +39,14 @@ module.exports = function(grunt) {
             },
             css: {
                 files: ['wp-content/themes/%THEME_SLUG%/*.scss', 'wp-content/themes/%THEME_SLUG%/sass/*.scss'],
-                tasks: ['sass', 'autoprefixer'],
+                tasks: ['compass', 'autoprefixer'],
                 options: {
                     spawn: false,
                 }
+            },
+            css_prefix: {
+                files: ['wp-content/themes/%THEME_SLUG%/no-prefix-style.css'],
+                tasks: ['autoprefixer']
             },
             scripts: {
                 files: ['wp-content/themes/%THEME_SLUG%/js/*.js'],
@@ -68,8 +65,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-compass');
 
     // 4. Where we tell Grunt what to do when we type "grunt" into the terminal.
-    grunt.registerTask('default', ['concat', 'uglify', 'sass', 'autoprefixer']);
+    grunt.registerTask('default', ['concat', 'uglify', 'compass', 'autoprefixer']);
 
 };
