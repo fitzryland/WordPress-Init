@@ -8,7 +8,7 @@ pinkHorizontal="$pinkBGStart ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ $colorEnd"
 pinkHorizontalSmall="$pinkTextStart ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ $colorEnd"
 pinkTick="$pinkTextStart ~ $colorEnd"
 
-gruntModules="grunt-contrib-concat grunt-contrib-uglify grunt-contrib-watch grunt-contrib-sass grunt-contrib-compass grunt-autoprefixer"
+gruntModules="grunt-contrib-concat grunt-contrib-uglify grunt-contrib-watch grunt-contrib-sass grunt-autoprefixer"
 wpPlugins="adminimize advanced-custom-fields force-strong-passwords"
 
 themeSlug=${PWD##*/}
@@ -17,10 +17,10 @@ databaseName="wpdb_$themeSlug"
 echo "$pinkTick Check if database name is in use $pinkTick"
 if /Applications/MAMP/Library/bin/mysql --user=root --password=root --execute="use $databaseName";
 then
-	echo "$pinkBGStart DATABASE BY THAT NAME ALREADY EXISTS $colorEnd"
-	echo "$pinkTick The database name is chosen by the name of the root project directory. $pinkTick"
-	echo "$pinkTick Either rename the project directory or delete the conflicting database. $pinkTick"
-	exit 0
+  echo "$pinkBGStart DATABASE BY THAT NAME ALREADY EXISTS $colorEnd"
+  echo "$pinkTick The database name is chosen by the name of the root project directory. $pinkTick"
+  echo "$pinkTick Either rename the project directory or delete the conflicting database. $pinkTick"
+  exit 0
 fi
 echo "$pinkTick dont worry about that error...."
 
@@ -100,23 +100,15 @@ perl -pi -w -e "s/%THEME_SLUG%/$themeSlug/g;" Gruntfile.js
 perl -pi -w -e "s/%THEME_SLUG%/$themeSlug/g;" config.rb
 
 echo "$pinkTick Search and replace theme meta $pinkTick"
-perl -pi -w -e "s~%THEME_SLUG%~$themeSlug~g;" wp-content/themes/_s/sass/no-prefix-style.scss
-perl -pi -w -e "s~%THEME_AUTHOR%~$authorName~g;" wp-content/themes/_s/sass/no-prefix-style.scss
-perl -pi -w -e "s~%THEME_AUTHOR_URI%~$authorUri~g;" wp-content/themes/_s/sass/no-prefix-style.scss
-perl -pi -w -e "s~%THEME_NAME%~$themeName~g;" wp-content/themes/_s/sass/no-prefix-style.scss
-perl -pi -w -e "s~%THEME_URI%~$themeUri~g;" wp-content/themes/_s/sass/no-prefix-style.scss
-perl -pi -w -e "s~%THEME_VERSION%~$themeVersion~g;" wp-content/themes/_s/sass/no-prefix-style.scss
-perl -pi -w -e "s~%THEME_DESCRIPTION%~$themeDescription~g;" wp-content/themes/_s/sass/no-prefix-style.scss
+perl -pi -w -e "s~%THEME_SLUG%~$themeSlug~g;" wp-content/themes/_s/sass/style.scss
+perl -pi -w -e "s~%THEME_AUTHOR%~$authorName~g;" wp-content/themes/_s/sass/style.scss
+perl -pi -w -e "s~%THEME_AUTHOR_URI%~$authorUri~g;" wp-content/themes/_s/sass/style.scss
+perl -pi -w -e "s~%THEME_NAME%~$themeName~g;" wp-content/themes/_s/sass/style.scss
+perl -pi -w -e "s~%THEME_URI%~$themeUri~g;" wp-content/themes/_s/sass/style.scss
+perl -pi -w -e "s~%THEME_VERSION%~$themeVersion~g;" wp-content/themes/_s/sass/style.scss
+perl -pi -w -e "s~%THEME_DESCRIPTION%~$themeDescription~g;" wp-content/themes/_s/sass/style.scss
 
 echo "$wpiFlag Prepare For WordPress Install $pinkHorizontalSmall"
-
-echo "$pinkTick installing Susy $pinkTick"
-cd wp-content/themes/_s/sass
-git clone https://github.com/ericam/susy.git
-mv susy/sass/* susyTemp
-rm -rf susy
-mv susyTemp/ susy
-cd ../../../../
 
 echo "$pinkTick Rename _s directory $pinkTick"
 themeDirectoryPath="wp-content/themes/$themeSlug"
