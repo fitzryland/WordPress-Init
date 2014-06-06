@@ -59,4 +59,4 @@ Local Dependencies
 - MAMP (servers running, MAMP and WP-CLI are a pain to get to play nice)
 - Grunt
 - Sass 3.3
-- Compass (for Susy.. or at least it used to be...)
+- Susy (ruby gem)
