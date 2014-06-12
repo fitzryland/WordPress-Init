@@ -24,6 +24,7 @@ TODO
 	- inc/customizer.php -> and reference from functions.php
 - a new default screenshot.png
 - add option for wpe vs vanilla wp install
+- add main.js to theme
 
 ### Grunt
 - add image optimization to theme files

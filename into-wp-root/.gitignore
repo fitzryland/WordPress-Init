@@ -3,6 +3,7 @@
 .tmp
 .tmp/*
 .tmp/**/*
+.htaccess
 
 *~
 .DS_Store
