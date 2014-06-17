@@ -1,9 +1,43 @@
 // CONTENT
 // This file contains all non printing styles other than layout.
-@mixin group() {
-	&:after {
-		content: "";
-		display: table;
-		clear: both;
-	}
+
+$lightGray: #787878;
+$gray: #6c6c6c;
+$darkGray: #444444;
+$yellow: #fab142;
+$white: #ffffff;
+$black: #000000;
+$color: (
+  bg: $white,
+  color: $darkGray,
+  heading: $yellow,
+  link: $darkGray,
+  link_active: $yellow,
+  shadow: transparentize($black, 0.9),
+  alt_bg: $darkGray,
+  alt_color: $white,
+  alt_link: $yellow,
+  alt_link_active: $yellow
+  );
+
+$font-trebuchet: ("Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif);
+
+$size-vertical: 2.5em;
+
+@function map($targetMap, $mapList) {
+  $mapItem: $targetMap;
+  @each $mapPart in $mapList {
+    $mapItem: map-get($mapItem, $mapPart);
+  }
+  @return $mapItem;
+}
+@function color($colorTree) {
+  @return map($color, $colorTree);
+}
+@mixin group {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
 }

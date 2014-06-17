@@ -2,14 +2,13 @@
 // This file contains all layout settings.
 // Layout is as anything that affects horizontal movement.
 
-// $breakpoint-no-queries: false;
 $breakpoint-no-query-fallbacks: true;
 
 $susy: (
 	gutters: 0.2
 );
 
-$layouts: (
+$breakpoints-map: (
 	small: (
 		break: 0em 37.5em,
 		grid: (
@@ -19,25 +18,40 @@ $layouts: (
 	medium: (
 		break: 37.5em 62em,
 		grid: (
-			columns: 9,
+			columns: 8,
+		)
+	),
+	medium-andup: (
+		break: 37.5em,
+		grid: (
+			columns: 8,
 		)
 	),
 	large: (
 		break: 62em,
 		grid: (
-			columns: 18,
+			columns: 16,
 		),
-		fallback: ".lt-ie9"
+		fallback: ".oldie"
 	)
 );
+
+$alternative-layouts: (
+	thirds: (columns: 3, gutters: 0.5)
+	);
+
+@function layout($layoutTree) {
+  @return map($alternative-layouts, $layoutTree);
+}
+
 @mixin bp($break-name) {
-	$layout: map-get($layouts, $break-name);
-	@if map-has-key($layout, "fallback") {
-		@include susy-breakpoint(map-get($layout, "break"), map-get($layout, "grid"), map-get($layout, "fallback")) {
+	$breakpoints: map-get($breakpoints-map, $break-name);
+	@if map-has-key($breakpoints, "fallback") {
+		@include susy-breakpoint(map-get($breakpoints, "break"), map-get($breakpoints, "grid"), map-get($breakpoints, "fallback")) {
 			@content;
 		}
 	} @else {
-		@include susy-breakpoint(map-get($layout, "break"), map-get($layout, "grid")) {
+		@include susy-breakpoint(map-get($breakpoints, "break"), map-get($breakpoints, "grid")) {
 			@content;
 		}
 	}
@@ -45,7 +59,7 @@ $layouts: (
 @mixin wrap() {
 	margin: 0 auto;
 	max-width: 80em;
-	padding: 1em;
+	padding: 0.5em;
 }
 @mixin row() {
 	clear: both;
